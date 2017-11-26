@@ -22,7 +22,7 @@ var ajaxFunctions = {
          }
       };
 
-      xmlhttp.open(method, url, true);
+      xmlhttp.openUri(method, url, true);
       xmlhttp.send();
    }
 };

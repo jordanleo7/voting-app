@@ -3,7 +3,7 @@
 var path = process.cwd();
 var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
 
-module.exports = function (app, passport) {
+module.exports = function (app, passport, bodyParser) {
 
 	function isLoggedIn (req, res, next) {
 		if (req.isAuthenticated()) {
@@ -54,4 +54,21 @@ module.exports = function (app, passport) {
 		.get(isLoggedIn, clickHandler.getClicks)
 		.post(isLoggedIn, clickHandler.addClick)
 		.delete(isLoggedIn, clickHandler.resetClicks);
+  
+  
+  
+  
+  app.post('/newpoll', function(req, res) {
+    
+    res.send('title: ' + req.body.title);
+    
+  });
+  
+  
+  
+  
+  
+  
+  
 };
+

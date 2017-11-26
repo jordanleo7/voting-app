@@ -1,7 +1,9 @@
 'use strict';
 
 (function () {
-
+  // I added this
+  var appUrl = 'https://voting-app-jordan.glitch.me';
+  
    var addButton = document.querySelector('.btn-add');
    var deleteButton = document.querySelector('.btn-delete');
    var clickNbr = document.querySelector('#click-nbr');
@@ -12,7 +14,11 @@
       clickNbr.innerHTML = clicksObject.clicks;
    }
 
-   ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount));
+   
+
+  
+  
+  ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount));
 
    addButton.addEventListener('click', function () {
 
