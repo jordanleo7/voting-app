@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>New poll</title>
+		
+		<link href="/public/css/main.css" rel="stylesheet" type="text/css">
+	</head>
+
+	<body>
+		<div class="container">	
+      
+      <form action="/newpoll" method="post" enctype="multipart/form-data">
+        <label for="title">Title:</label>
+        <input id="title" type="text" name="title" placeholder="Title">
+        <label for="choices">Choices:</label>
+        <textarea id="choices" rows="5" name="choices" placeholder="Enter one choice per line."></textarea>
+        <input type="submit">
+      </form>
+      
+      <div id="results">
+        
+      </div>
+      
+		</div>
+    
+	</body>
+
+</html>
