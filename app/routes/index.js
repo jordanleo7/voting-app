@@ -1,9 +1,12 @@
 'use strict';
 
+var bodyParser = require('body-parser');
+var urlEncodedParser = bodyParser.urlencoded({ extended: false });
+
 var path = process.cwd();
 var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
 
-module.exports = function (app, passport, bodyParser) {
+module.exports = function (app, passport) {
 
 	function isLoggedIn (req, res, next) {
 		if (req.isAuthenticated()) {
@@ -58,9 +61,9 @@ module.exports = function (app, passport, bodyParser) {
   
   
   
-  app.post('/newpoll', function(req, res) {
+  app.post('/newpoll/', urlEncodedParser, function(req, res) {
     
-    res.send('title: ' + req.body.title);
+    res.send('title: ' + req.body.title + JSON.stringify(req.body.title));
     
   });
   
