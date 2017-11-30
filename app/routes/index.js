@@ -63,15 +63,20 @@ module.exports = function (app, passport) {
   
   app.post('/newpoll/', urlEncodedParser, function(req, res) {
     
-    res.send('title: ' + req.body.title + JSON.stringify(req.body.title));
+    var partsOfStr = req.body.choices.split(/\r?\n/);
+    
+    var i = 0;
+    
+    var createForm = '';
+    
+    for (i = 0; i < partsOfStr.length; i++) { 
+      createForm += '<input type="radio" id="' + i + '" name="choice" value="' + partsOfStr[i] + '" /> <label for="' + i + '">' + partsOfStr[i] + '</label>' + "<br>";
+    }
+    
+    var createRadioButton = '<input type="radio" id="' + i + '" name="choice" value="' + partsOfStr[i] + '" /> <label for="' + i + '">' + partsOfStr[i] + '</label>'
+    
+    res.send(req.body.title + '<br><br>' + createForm);
     
   });
-  
-  
-  
-  
-  
-  
-  
-};
 
+};
