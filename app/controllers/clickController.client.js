@@ -1,5 +1,7 @@
 'use strict';
 
+var ajaxFunctions = require('ajax-functions')
+
 (function () {
   // I added this
   var appUrl = 'https://voting-app-jordan.glitch.me';
@@ -14,10 +16,6 @@
       clickNbr.innerHTML = clicksObject.clicks;
    }
 
-   
-
-  
-  
   ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, updateClickCount));
 
    addButton.addEventListener('click', function () {

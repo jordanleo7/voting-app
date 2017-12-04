@@ -7,7 +7,6 @@ var passport = require('passport');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 
-
 var app = express();
 require('dotenv').load();
 require('./app/config/passport')(passport);
@@ -32,6 +31,10 @@ app.use(passport.session());
 var jsonParser = bodyParser.json()
 // create application/x-www-form-urlencoded parser
 var urlEncodedParser = bodyParser.urlencoded({ extended: false })
+
+// parse application/json
+app.use(bodyParser.json())
+ 
 // POST /login gets urlencoded bodies
 app.post('/login', urlEncodedParser, function (req, res) {
   if (!req.body) return res.sendStatus(400)
@@ -50,4 +53,3 @@ var port = process.env.PORT || 8080;
 app.listen(port,  function () {
 	console.log('Node.js listening on port ' + port + '...');
 });
-

@@ -2,6 +2,7 @@
 
 var bodyParser = require('body-parser');
 var urlEncodedParser = bodyParser.urlencoded({ extended: false });
+var Polls = require('../models/polls.js');
 
 var path = process.cwd();
 var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
@@ -61,22 +62,40 @@ module.exports = function (app, passport) {
   
   
   
+  
+  // Save a new poll
   app.post('/newpoll/', urlEncodedParser, function(req, res) {
-    
+    // Split textarea by enter/return
     var partsOfStr = req.body.choices.split(/\r?\n/);
-    
     var i = 0;
-    
     var createForm = '';
-    
+    var createVotes = [];
     for (i = 0; i < partsOfStr.length; i++) { 
       createForm += '<input type="radio" id="' + i + '" name="choice" value="' + partsOfStr[i] + '" /> <label for="' + i + '">' + partsOfStr[i] + '</label>' + "<br>";
+      createVotes.push(0);
     }
-    
+    var newPoll = new Polls({ title: req.body.title, choices: partsOfStr, votes: createVotes});
+    newPoll.save(function (err) {
+              if (err) return err;
+            });
     var createRadioButton = '<input type="radio" id="' + i + '" name="choice" value="' + partsOfStr[i] + '" /> <label for="' + i + '">' + partsOfStr[i] + '</label>'
-    
-    res.send(req.body.title + '<br><br>' + createForm);
-    
+    res.send(req.body.title + '<br><br>' + createForm + createVotes);
   });
+  
+  
+  
+	app.route('/polls')
+		.get(function (req, res) {
+			res.sendFile(path + '/public/polls.html');
+		});
 
+
+  
+
+  
+  
+
+  
+  
+  
 };
